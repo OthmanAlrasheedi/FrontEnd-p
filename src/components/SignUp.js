@@ -26,7 +26,7 @@ export default function SignUp() {
     // });
     try {
       const response = await axios.post(
-        "https://dashboard.heroku.com/apps/othman-backend/logs/signUp",
+        "https://othman-backend.herokuapp.com/signUp",
         {
           name: name,
           email: email,

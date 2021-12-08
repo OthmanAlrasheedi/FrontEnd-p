@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 export default function Coffe({ token }) {
-  const [allData, setallData] = useState(null)
+  const [allData, setallData] = useState(null);
   useEffect(async (id) => {
     try {
-      const result = await axios.get(`https://dashboard.heroku.com/apps/othman-backend/logs/getaddProduct/${id}`,
+      const result = await axios.get(
+        `https://othman-backend.herokuapp.com/getaddProduct/${id}`,
         {
           headers: { authorization: "Bearer " + token },
         }
@@ -17,14 +18,16 @@ export default function Coffe({ token }) {
   }, []);
   return (
     <div>
-      {allData?<div>
-        <p >{allData.name}</p>
-              <p> {allData.price}</p>
-              
-              <img  className="imgggg"
-              src={allData.img}alt="nooo img"/>
+      {allData ? (
+        <div>
+          <p>{allData.name}</p>
+          <p> {allData.price}</p>
 
-      </div> :""}
+          <img className="imgggg" src={allData.img} alt="nooo img" />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

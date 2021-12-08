@@ -17,7 +17,7 @@ export default function Courses({ token }) {
   console.log(token, "token");
   useEffect(async () => {
     const res = await axios.get(
-      "https://dashboard.heroku.com/apps/othman-backend/logs/getaddProduct",
+      "https://othman-backend.herokuapp.com/getaddProduct",
       {
         headers: { authorization: "Bearer " + token },
       }
@@ -43,7 +43,7 @@ export default function Courses({ token }) {
     console.log("Sss");
     try {
       const result = await axios.post(
-        "https://dashboard.heroku.com/apps/othman-backend/logs/addProduct",
+        "https://othman-backend.herokuapp.com/addProduct",
         {
           name: name,
           price: price,
@@ -66,7 +66,7 @@ export default function Courses({ token }) {
   const deletePro = async (id, index) => {
     try {
       const deletedCourse = await axios.delete(
-        `https://dashboard.heroku.com/apps/othman-backend/logs/deletProduct/${id}`,
+        `https://othman-backend.herokuapp.com/deletProduct/${id}`,
         {
           headers: { authorization: "Bearer " + token },
         }
@@ -98,7 +98,7 @@ export default function Courses({ token }) {
   const fav = async (id) => {
     try {
       const result = await axios.post(
-        `https://dashboard.heroku.com/apps/othman-backend/logs/like/${id}`,
+        `https://othman-backend.herokuapp.com/like/${id}`,
         {},
         {
           headers: { authorization: "Bearer " + token },

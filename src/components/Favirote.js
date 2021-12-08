@@ -7,9 +7,12 @@ export default function Favirote({ token }) {
   useEffect(async () => {
     try {
       if (token) {
-        const reult = await axios.get("https://dashboard.heroku.com/apps/othman-backend/logs/like/", {
-          headers: { authorization: "Bearer " + token },
-        });
+        const reult = await axios.get(
+          "https://othman-backend.herokuapp.com/like/",
+          {
+            headers: { authorization: "Bearer " + token },
+          }
+        );
         setFvairote(reult.data);
         console.log(reult.data);
       }
@@ -18,13 +21,16 @@ export default function Favirote({ token }) {
     }
   }, [token]);
 
-  const removeFav = async (id,i) => {
-    const result = await axios.delete(`https://dashboard.heroku.com/apps/othman-backend/logs/unlike/${id}`, {
-      headers: { authorization: "Bearer " + token },
-    });
+  const removeFav = async (id, i) => {
+    const result = await axios.delete(
+      `https://othman-backend.herokuapp.com/${id}`,
+      {
+        headers: { authorization: "Bearer " + token },
+      }
+    );
     console.log(result.data);
-    const copied = [...fvairote]
-    copied.splice(i,1)
+    const copied = [...fvairote];
+    copied.splice(i, 1);
     setFvairote(copied);
   };
 
@@ -39,7 +45,7 @@ export default function Favirote({ token }) {
             <BsFillHeartFill
               className="HEART"
               onClick={() => {
-                removeFav(elem._id,i);
+                removeFav(elem._id, i);
               }}
             />
           </div>
