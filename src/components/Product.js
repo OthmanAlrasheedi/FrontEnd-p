@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BsFillHeartFill } from "react-icons/bs";
 import { useHistory } from "react-router-dom";
 import { GrBasket } from "react-icons/gr";
-import "./Pruduct.css"
+import "./Pruduct.css";
 import axios from "axios";
 
 export default function Courses({ token }) {
@@ -16,9 +16,12 @@ export default function Courses({ token }) {
 
   console.log(token, "token");
   useEffect(async () => {
-    const res = await axios.get("http://localhost:5000/getaddProduct", {
-      headers: { authorization: "Bearer " + token },
-    });
+    const res = await axios.get(
+      "https://dashboard.heroku.com/apps/othman-backend/logs/getaddProduct",
+      {
+        headers: { authorization: "Bearer " + token },
+      }
+    );
     setproduct(res.data);
   }, []);
 
@@ -40,7 +43,7 @@ export default function Courses({ token }) {
     console.log("Sss");
     try {
       const result = await axios.post(
-        "http://localhost:5000/addProduct",
+        "https://dashboard.heroku.com/apps/othman-backend/logs/addProduct",
         {
           name: name,
           price: price,
@@ -63,7 +66,7 @@ export default function Courses({ token }) {
   const deletePro = async (id, index) => {
     try {
       const deletedCourse = await axios.delete(
-        `http://localhost:5000/deletProduct/${id}`,
+        `https://dashboard.heroku.com/apps/othman-backend/logs/deletProduct/${id}`,
         {
           headers: { authorization: "Bearer " + token },
         }
@@ -95,7 +98,7 @@ export default function Courses({ token }) {
   const fav = async (id) => {
     try {
       const result = await axios.post(
-        `http://localhost:5000/like/${id}`,
+        `https://dashboard.heroku.com/apps/othman-backend/logs/like/${id}`,
         {},
         {
           headers: { authorization: "Bearer " + token },
@@ -108,64 +111,97 @@ export default function Courses({ token }) {
   };
 
   return (
-    
     <>
-    <div id="inputSearch"><input placeholder="search"
-    onChange={(e) => {searchTarget(e); }}
-    /><button onClick={() => {search1();}}>🔍
-</button>
+      <div id="inputSearch">
+        <input
+          placeholder="search"
+          onChange={(e) => {
+            searchTarget(e);
+          }}
+        />
+        <button
+          onClick={() => {
+            search1();
+          }}
+        >
+          🔍
+        </button>
+      </div>
 
-</div>
-
-    
-  
       <div className="miandevv">
-      
-    <div id="mm" >
-        {proudect.map((element, i) => {
-          return (
-            <div id="map" key={element._id}>
-           {" "}
-             
-              {/* <h1>{element.user.name}</h1> */}
-              <div  id="id">
-              <p >{element.name}</p>
-              <p> {element.price}</p>
-              
-              <img  className="imgggg"
-                onClick={() => { GoToCoffe(element._id);}}
-                src={element.img}alt="nooo img"/>
+        <div id="mm">
+          {proudect.map((element, i) => {
+            return (
+              <div id="map" key={element._id}>
+                {" "}
+                {/* <h1>{element.user.name}</h1> */}
+                <div id="id">
+                  <p>{element.name}</p>
+                  <p> {element.price}</p>
 
-                <div className="icons">
-                <BsFillHeartFill className="HEART" onClick={() => { fav(element._id);}}/>
+                  <img
+                    className="imgggg"
+                    onClick={() => {
+                      GoToCoffe(element._id);
+                    }}
+                    src={element.img}
+                    alt="nooo img"
+                  />
 
-                <GrBasket id="delelet" onClick={() => {deletePro(element._id, i);}}/></div>
+                  <div className="icons">
+                    <BsFillHeartFill
+                      className="HEART"
+                      onClick={() => {
+                        fav(element._id);
+                      }}
+                    />
 
-                 
-
+                    <GrBasket
+                      id="delelet"
+                      onClick={() => {
+                        deletePro(element._id, i);
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
-              
-            </div>
-          );
-        })}
-      </div><div id="putfinal">
-      <input id="i1" placeholder="name" onChange={(e) => {
-          changeNameVal(e);}}/>{" "}
-
-      <input id="i1" placeholder="price" onChange={(e) => {
-          changeDescVal(e);}} />
-
-      <input id="i1" placeholder="image" onChange={(e) => {
-          changeImgVal(e);}} />
-
-      <button id="i11" onClick={() => {addProduct();}}>
-        Submit </button>
+            );
+          })}
+        </div>
+        <div id="putfinal">
+          <input
+            id="i1"
+            placeholder="name"
+            onChange={(e) => {
+              changeNameVal(e);
+            }}
+          />{" "}
+          <input
+            id="i1"
+            placeholder="price"
+            onChange={(e) => {
+              changeDescVal(e);
+            }}
+          />
+          <input
+            id="i1"
+            placeholder="image"
+            onChange={(e) => {
+              changeImgVal(e);
+            }}
+          />
+          <button
+            id="i11"
+            onClick={() => {
+              addProduct();
+            }}
+          >
+            Submit{" "}
+          </button>
+        </div>
       </div>
-      </div>
-      
+
       {/* <h3>{token}</h3> */}
-      
     </>
-    
   );
 }

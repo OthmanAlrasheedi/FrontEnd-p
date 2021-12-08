@@ -7,7 +7,7 @@ export default function Favirote({ token }) {
   useEffect(async () => {
     try {
       if (token) {
-        const reult = await axios.get("http://localhost:5000/like/", {
+        const reult = await axios.get("https://dashboard.heroku.com/apps/othman-backend/logs/like/", {
           headers: { authorization: "Bearer " + token },
         });
         setFvairote(reult.data);
@@ -19,7 +19,7 @@ export default function Favirote({ token }) {
   }, [token]);
 
   const removeFav = async (id,i) => {
-    const result = await axios.delete(`http://localhost:5000/unlike/${id}`, {
+    const result = await axios.delete(`https://dashboard.heroku.com/apps/othman-backend/logs/unlike/${id}`, {
       headers: { authorization: "Bearer " + token },
     });
     console.log(result.data);

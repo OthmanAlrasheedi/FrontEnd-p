@@ -16,7 +16,7 @@ export default function Login({ setToken }) {
 
   const checkLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/login", {
+      const response = await axios.post("https://dashboard.heroku.com/apps/othman-backend/logs/login", {
         email:email, password:password
       });
       setToken(response.data.token);

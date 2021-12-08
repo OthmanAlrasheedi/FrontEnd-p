@@ -4,7 +4,7 @@ export default function Coffe({ token }) {
   const [allData, setallData] = useState(null)
   useEffect(async (id) => {
     try {
-      const result = await axios.get(`http://localhost:5000/getaddProduct/${id}`,
+      const result = await axios.get(`https://dashboard.heroku.com/apps/othman-backend/logs/getaddProduct/${id}`,
         {
           headers: { authorization: "Bearer " + token },
         }
